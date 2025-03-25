@@ -614,6 +614,8 @@ textarea {
 .project-cs-hero__cta {
   margin-top: 5rem;
   text-align: center;
+  gap: 12px;
+  justify-content: center;
 }
 
 .project-details__content {
