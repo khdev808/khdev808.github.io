@@ -1,6 +1,11 @@
 (function () {
   'use strict';
 
+  const copyrightYear = document.getElementById('copyright-year');
+  if (copyrightYear) {
+    copyrightYear.textContent = new Date().getFullYear();
+  }
+
   const hamMenuBtn = document.querySelector('.header__main-ham-menu-cont');
   const smallMenu = document.querySelector('.header__sm-menu');
   const headerHamMenuBtn = document.querySelector('.header__main-ham-menu');
