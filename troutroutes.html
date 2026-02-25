@@ -12,12 +12,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <header class="header">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="header" role="banner">
       <div class="header__content">
         <div class="header__logo-container">
           <div class="header__logo-img-cont">
@@ -46,7 +47,7 @@
               <a href="./index.html#contact" class="header__link"> Contact </a>
             </li>
           </ul>
-          <div class="header__main-ham-menu-cont">
+          <div class="header__main-ham-menu-cont" role="button" tabindex="0" aria-label="Toggle menu" aria-expanded="false">
             <img
               src="./assets/svg/ham-menu.svg"
               alt="hamburger menu"
@@ -82,6 +83,7 @@
         </div>
       </div>
     </header>
+    <main id="main-content">
     <section class="project-cs-hero">
       <div class="project-cs-hero__content">
         <h1 class="heading-primary">TrouteRoutes</h1>
@@ -104,7 +106,7 @@
         <div class="project-details__content">
           <div class="project-details__showcase-img-cont">
             <img
-              src="./assets/png/TrouteRoutesMockup.png"
+              src="./assets/png/troutroutes.png"
               alt="Project Image"
               class="project-details__showcase-img"
             />
@@ -124,27 +126,16 @@
                 visualized fishing data—all in one place.
               </p>
               <h3 class="about__content-title">Key Features</h3>
-              <div class="about__content-details">
-                <p class="about__content-details-para">
-                  <ul class="about__content-details-para why-list">
-                    <ul class="about__content-details-para why-list">
-                      <li> Interactive GPS maps for streams, rivers, and
-                        access points</li>
-                      <li> Offline functionality for on-the-go use in remote
-                        areas</li>
-                      <li> Integrated payment system with Stripe for subscriptions
-                        and upgrades</li>
-                      <li> Real-time location and routing using Google APIs
-                        and Mapbox Available on web and mobile for accessibility in any
-                        environment</li>
-                    </ul>
-                  </p>
-                  <p class="project-details__desc-para">
-                    TroutRoutes continues to lead the category in fly
-                fishing tech—bringing together data, design, and functionality
-                to help anglers fish smarter.
-                  </p>
-                </div>
+              <ul class="about__content-details-para why-list">
+                <li>Interactive GPS maps for streams, rivers, and access points</li>
+                <li>Offline functionality for on-the-go use in remote areas</li>
+                <li>Integrated payment system with Stripe for subscriptions and upgrades</li>
+                <li>Real-time location and routing using Google APIs and Mapbox. Available on web and mobile for accessibility in any environment</li>
+              </ul>
+              <p class="project-details__desc-para">
+                TroutRoutes continues to lead the category in fly fishing tech—bringing together data, design, and functionality to help anglers fish smarter.
+              </p>
+            </div>
             <div class="project-details__tools-used">
               <h3 class="project-details__content-title">Tools Used</h3>
               <div class="skills">
@@ -163,7 +154,7 @@
               <h3 class="project-details__content-title">See Live</h3>
               <a
                 href="https://play.google.com/store/apps/details?id=com.troutinsights.troutroutes&hl=en_US"
-                class="btn btn--med btn--theme project-details__links-btn"
+                class="btn btn--theme project-details__links-btn"
                 target="_blank"
                 >Live Link</a
               >
@@ -172,7 +163,8 @@
         </div>
       </div>
     </section>
-    <footer class="main-footer">
+    </main>
+    <footer class="main-footer" role="contentinfo">
       <div class="main-container">
         <div class="main-footer__upper">
           <div class="main-footer__row main-footer__row-1">
@@ -180,7 +172,7 @@
               <span>Social</span>
             </h2>
             <div class="main-footer__social-cont">
-              <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/kelseynocek12/">
+              <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/company/khdev">
                 <img
                   class="main-footer__icon"
                   src="./assets/png/linkedin-ico.png"

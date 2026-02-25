@@ -1,68 +1,97 @@
 @use "../abstracts/mixins";
+@use "../abstracts/variables";
 
 .main-footer {
-  background: #000;
-  color: #fff;
+  background: variables.$color-footer-bg;
+  color: variables.$color-text-on-dark;
+
   &__upper {
     display: flex;
     justify-content: space-between;
-    padding: 8rem 0;
+    align-items: flex-start;
+    gap: variables.$space-10;
+    padding: variables.$space-20 0;
     @include mixins.respond(tab-port) {
-      padding: 6rem 0;
-    }
-    @include mixins.respond(phone) {
-      display: block;
+      flex-direction: column;
+      padding: variables.$space-14 0;
+      text-align: center;
     }
   }
 
   &__row-1 {
     order: 2;
     @include mixins.respond(tab-port) {
-      margin-bottom: 5rem;
+      order: 1;
+      margin-bottom: 0;
     }
   }
+
   &__row-2 {
-    width: 40%;
+    width: 100%;
+    max-width: 42rem;
     order: 1;
-    max-width: 50rem;
     @include mixins.respond(tab-port) {
-      width: 100%;
+      order: 2;
     }
+  }
+
+  &__heading-sm {
+    font-size: variables.$font-size-sm;
+    font-weight: variables.$font-weight-bold;
+    letter-spacing: variables.$letter-spacing-wide;
+    text-transform: uppercase;
+    color: variables.$color-text-on-dark-muted;
   }
 
   &__short-desc {
-    margin-top: 2rem;
-    color: #eee;
-    font-size: 1.5rem;
-    line-height: 1.7;
+    margin-top: variables.$space-3;
+    color: variables.$color-text-on-dark-muted;
+    font-size: variables.$font-size-base;
+    line-height: variables.$line-height-relaxed;
   }
 
   &__social-cont {
-    margin-top: 2rem;
+    margin-top: variables.$space-4;
+    display: flex;
+    gap: variables.$space-2;
+    @include mixins.respond(tab-port) {
+      justify-content: center;
+    }
   }
 
   &__icon {
-    margin-right: 1rem;
-    width: 2.5rem;
+    width: 2.8rem;
+    height: 2.8rem;
+    min-width: 2.8rem;
+    min-height: 2.8rem;
+    flex-shrink: 0;
+    opacity: 0.9;
+    transition: opacity variables.$transition-fast, transform variables.$transition-fast;
+    &:hover {
+      opacity: 1;
+      transform: scale(1.08);
+    }
     &--mr-none {
       margin-right: 0;
     }
   }
 
   &__lower {
-    padding: 4rem 0;
-    border-top: 1px solid #444;
-    color: #eee;
-    font-size: 1.2rem;
-    text-align: left;
+    padding: variables.$space-6 0;
+    border-top: 1px solid variables.$color-footer-border;
+    color: variables.$color-text-on-dark-muted;
+    font-size: variables.$font-size-sm;
     text-align: center;
     a {
       text-decoration: underline;
-      font-weight: bold;
-      margin-left: 2px;
+      font-weight: variables.$font-weight-semibold;
+      color: variables.$color-text-on-dark-muted;
+      &:hover {
+        color: variables.$color-text-on-dark;
+      }
     }
     @include mixins.respond(tab-port) {
-      padding: 3.5rem 0;
+      padding: variables.$space-5 0;
     }
   }
 }

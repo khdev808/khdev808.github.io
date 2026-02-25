@@ -1,4 +1,5 @@
 @use "../abstracts/mixins";
+@use "../abstracts/variables";
 
 *,
 *::after,
@@ -10,34 +11,31 @@
 }
 
 html {
-  // This defines what 1rem is
-  font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+  font-size: 62.5%;
   scroll-behavior: smooth;
-
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
   @include mixins.respond(tab-land) {
-    // width < 1200?
-    font-size: 59%; //1 rem =
+    font-size: 59%;
   }
-
   @include mixins.respond(tab-port) {
-    // width < 900?
-    font-size: 56%; //1 rem =
+    font-size: 56%;
   }
-
   @include mixins.respond(big-desktop) {
-    font-size: 65%; //1rem =
+    font-size: 65%;
   }
 }
 
 body {
   box-sizing: border-box;
   position: relative;
-  line-height: 1.5;
-  font-family: sans-serif;
+  line-height: variables.$line-height-normal;
+  font-family: variables.$font-sans;
   overflow-x: hidden;
   overflow-y: scroll;
-  font-family: 'Source Sans Pro', sans-serif;
-  
+  background: variables.$color-bg;
+  color: variables.$color-text;
 }
 
 a {
@@ -53,7 +51,23 @@ input:focus,
 button:focus,
 a:focus,
 textarea:focus {
+  outline: 2px solid variables.$color-primary;
+  outline-offset: 2px;
+}
+
+input:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible) {
   outline: none;
+}
+
+input:focus-visible,
+button:focus-visible,
+a:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid variables.$color-primary;
+  outline-offset: 2px;
 }
 
 button {

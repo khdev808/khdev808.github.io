@@ -5,17 +5,23 @@
   position: fixed;
   width: 100%;
   z-index: 1000;
-  background: #000;
-  background: #fff;
-  box-shadow: 0 10px 100px rgba(0, 0, 0, 0.1);
+  background: rgba(variables.$color-surface, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: variables.$shadow-sm;
+  border-bottom: 1px solid variables.$color-border;
 
   &__content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 5rem;
+    max-width: 120rem;
+    width: 92%;
+    margin: 0 auto;
+    padding: 1.2rem 0;
     @include mixins.respond(tab-port) {
-      padding: 0 2rem;
+      padding: 1rem 2rem;
+      width: 100%;
     }
   }
 
@@ -23,27 +29,33 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: #333;
-    transition: color .3s;
-
+    color: variables.$color-text;
+    transition: color variables.$transition-base, opacity variables.$transition-base;
     &:hover {
-      color: variables.$themeClrPrimary;
+      color: variables.$color-primary;
+      opacity: 0.9;
     }
   }
-  &__logo-img-cont {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50px;
-    overflow: hidden;
-    margin-right: 1.5rem;
-    background: variables.$themeClrPrimary;
 
+  &__logo-img-cont {
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: variables.$radius-lg;
+    overflow: hidden;
+    margin-right: 1.2rem;
+    background: variables.$color-primary-light;
+    border: 1px solid rgba(variables.$color-primary, 0.2);
+    transition: box-shadow variables.$transition-fast;
     @include mixins.respond(tab-port) {
-      width: 4.5rem;
-      height: 4.5rem;
-      margin-right: 1.2rem;
+      width: 4.2rem;
+      height: 4.2rem;
     }
   }
+
+  &__logo-container:hover &__logo-img-cont {
+    box-shadow: 0 0 0 2px rgba(variables.$color-primary, 0.25);
+  }
+
   &__logo-img {
     width: 100%;
     height: 100%;
@@ -51,101 +63,105 @@
     object-position: center;
     display: block;
   }
-  &__logo-sub {
-    font-size: 1.8rem;
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
+
   &__links {
     display: flex;
+    align-items: center;
+    gap: 0.4rem;
     @include mixins.respond(phone) {
       display: none;
     }
   }
-  &__link {
-    padding: 2.2rem 3rem;
-    display: inline-block;
-    font-size: 1.6rem;
-    color: #333;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-    transition: color .3s;
 
+  &__link {
+    padding: 0.9rem 1.4rem;
+    display: inline-block;
+    font-size: variables.$font-size-sm;
+    font-weight: variables.$font-weight-semibold;
+    color: variables.$color-text-muted;
+    letter-spacing: 0.02em;
+    border-radius: variables.$radius-sm;
+    transition: color variables.$transition-fast, background variables.$transition-fast;
     &:hover {
-      color: variables.$themeClrPrimary;
+      color: variables.$color-primary;
+      background: variables.$color-primary-light;
     }
     @include mixins.respond(tab-port) {
-      padding: 3rem 1.8rem;
-      font-size: 1.5rem;
+      padding: 0.8rem 1.2rem;
+      font-size: 1.35rem;
     }
   }
 
   &__main-ham-menu-cont {
     display: none;
     width: 3rem;
-
-    padding: 2.2rem 0;
-
+    padding: 1.8rem 0;
+    cursor: pointer;
+    border-radius: variables.$radius-sm;
+    transition: background variables.$transition-fast;
+    &:hover {
+      background: variables.$color-bg-section;
+    }
     @include mixins.respond(phone) {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
-  &__main-ham-menu {
-    width: 100%;
-  }
+
+  &__main-ham-menu,
   &__main-ham-menu-close {
     width: 100%;
+    display: block;
   }
 
   &__sm-menu {
-    background: #fff;
     position: absolute;
-    width: 100%;
     top: 100%;
+    left: 0;
+    right: 0;
+    background: variables.$color-surface;
     visibility: hidden;
     opacity: 0;
-    transition: all .3s;
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    transition: visibility variables.$transition-base, opacity variables.$transition-base, transform variables.$transition-base;
+    box-shadow: variables.$shadow-lg;
+    border-bottom: 1px solid variables.$color-border;
 
     &--active {
       visibility: hidden;
       opacity: 0;
-   
+      transform: translateY(-8px);
       @include mixins.respond(phone) {
         visibility: visible;
         opacity: 1;
+        transform: translateY(0);
       }
     }
   }
-  &__sm-menu-link {
-    a {
-      display: block;
-      text-decoration: none;
-      padding: 2.5rem 3rem;
-      font-size: 1.6rem;
-      color: #333;
-      text-align: right;
-      border-bottom: 1px solid #eee;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      transition: color .3s;
-      
-      &:hover {
-        color: variables.$themeClrPrimary;
-      }
+
+  &__sm-menu-content {
+    padding: variables.$space-2 0;
+  }
+
+  &__sm-menu-link a {
+    display: block;
+    padding: 1.4rem 2rem;
+    font-size: variables.$font-size-base;
+    font-weight: variables.$font-weight-semibold;
+    color: variables.$color-text;
+    transition: background variables.$transition-fast, color variables.$transition-fast;
+    border-bottom: 1px solid variables.$color-border;
+    &:hover {
+      background: variables.$color-primary-light;
+      color: variables.$color-primary;
     }
-    &:first-child {
-      a {
-        border-top: 1px solid #eee;
-      }
+    &:last-child {
+      border-bottom: none;
     }
   }
-  &__sm-menu-link-last {
-    border-bottom: 0;
+
+  &__sm-menu-link:first-child a {
+    border-top: none;
   }
 }

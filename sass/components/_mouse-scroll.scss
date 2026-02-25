@@ -1,36 +1,30 @@
+@use "../abstracts/variables";
+
 .mouse {
-  width: 25px;
-  height: 40px;
-  border: 2px solid #eee;
+  width: 26px;
+  height: 42px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
   border-radius: 60px;
   position: relative;
   overflow: hidden;
   &::before {
     content: '';
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     position: absolute;
-    top: 7px;
+    top: 8px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #eee;
+    background: variables.$color-primary;
     border-radius: 50%;
     opacity: 1;
-    animation: wheel 1.3s infinite;
-    -webkit-animation: wheel 1.3s infinite;
+    animation: wheel 1.4s ease-in-out infinite;
   }
 }
 
 @keyframes wheel {
   to {
     opacity: 0;
-    top: 27px;
-  }
-}
-
-@-webkit-keyframes wheel {
-  to {
-    opacity: 0;
-    top: 27px;
+    top: 26px;
   }
 }

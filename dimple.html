@@ -12,12 +12,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <header class="header">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="header" role="banner">
       <div class="header__content">
         <div class="header__logo-container">
           <div class="header__logo-img-cont">
@@ -46,7 +47,7 @@
               <a href="./index.html#contact" class="header__link"> Contact </a>
             </li>
           </ul>
-          <div class="header__main-ham-menu-cont">
+          <div class="header__main-ham-menu-cont" role="button" tabindex="0" aria-label="Toggle menu" aria-expanded="false">
             <img
               src="./assets/svg/ham-menu.svg"
               alt="hamburger menu"
@@ -82,6 +83,7 @@
         </div>
       </div>
     </header>
+    <main id="main-content">
     <section class="project-cs-hero">
       <div class="project-cs-hero__content">
         <h1 class="heading-primary">Dimple</h1>
@@ -102,7 +104,7 @@
         <div class="project-details__content">
           <div class="project-details__showcase-img-cont">
             <img
-              src="./assets/png/DimpleMockup.png"
+              src="./assets/png/dimple-dating-1.png"
               alt="Project Image"
               class="project-details__showcase-img"
             />
@@ -123,22 +125,13 @@
               </p>
 
               <h3 class="about__content-title">Key Features</h3>
-            <div class="about__content-details">
-              <p class="about__content-details-para">
-                <ul class="about__content-details-para why-list">
-                  <li> LiveMatch: Meet new people in real time with a
-                    dating experience that feels almost IRL.</li>
-                  <li> Swipe & Schedule:
-                    Match, message, video chat, or set up a date on your own
-                    timeline.</li>
-                  <li> Stories: Share your day with 24-hour photo and video
-                    updates that invite interaction.</li>
-                  <li> Flavors: Conversation starters
-                    that make first messages less awkward and more fun.</li>
-                    <li>Unlimited
-                      Likes: Because no one should run out of ways to show interest.</li>
-                </ul>
-              </p>
+              <ul class="about__content-details-para why-list">
+                <li>LiveMatch: Meet new people in real time with a dating experience that feels almost IRL.</li>
+                <li>Swipe & Schedule: Match, message, video chat, or set up a date on your own timeline.</li>
+                <li>Stories: Share your day with 24-hour photo and video updates that invite interaction.</li>
+                <li>Flavors: Conversation starters that make first messages less awkward and more fun.</li>
+                <li>Unlimited Likes: Because no one should run out of ways to show interest.</li>
+              </ul>
               <p class="project-details__desc-para">
                 From user onboarding to live video integration, Dimple rethinks
                 what dating apps can be—personal, playful, and built with
@@ -166,7 +159,7 @@
               <h3 class="project-details__content-title">See Live</h3>
               <a
                 href="https://apps.apple.com/us/app/dimple-dating-collegematch/id1526816163"
-                class="btn btn--med btn--theme project-details__links-btn"
+                class="btn btn--theme project-details__links-btn"
                 target="_blank"
                 >Live Link</a
               >
@@ -175,7 +168,8 @@
         </div>
       </div>
     </section>
-    <footer class="main-footer">
+    </main>
+    <footer class="main-footer" role="contentinfo">
       <div class="main-container">
         <div class="main-footer__upper">
           <div class="main-footer__row main-footer__row-1">
@@ -183,7 +177,7 @@
               <span>Social</span>
             </h2>
             <div class="main-footer__social-cont">
-              <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/kelseynocek12/">
+              <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/company/khdev">
                 <img
                   class="main-footer__icon"
                   src="./assets/png/linkedin-ico.png"

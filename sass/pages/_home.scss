@@ -2,146 +2,260 @@
 @use "../abstracts/variables";
 
 .home-hero {
-  color: #fff;
-  background: linear-gradient(
-      to right,
-      rgba(variables.$themeClrPrimary, 0.8),
-      rgba(variables.$themeClrPrimary, 0.8)
-    ),
-    url(../../assets/svg/common-bg.svg);
-  background-position: center;
-
-  height: 100vh;
-
-  min-height: 80rem;
-  max-height: 120rem;
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: variables.$gradient-hero;
+  background-attachment: scroll;
+  color: variables.$color-text-on-dark;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: variables.$gradient-hero-mesh;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url(../../assets/svg/common-bg.svg) center/cover no-repeat;
+    opacity: 0.04;
+    pointer-events: none;
+  }
 
   @include mixins.respond(phone) {
-    height: unset;
-    min-height: unset;
+    min-height: 90vh;
+    padding: 16rem 0 10rem;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: 92rem;
+    width: 92%;
+    text-align: center;
+    opacity: 0;
+    animation: hero-reveal 1s variables.$ease-out-expo 0.2s forwards;
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      opacity: 1;
+    }
+  }
+
+  &__info {
+    margin-top: variables.$space-8;
+  }
+
+  &__cta {
+    margin-top: variables.$space-10;
+  }
+
+  .heading-primary {
+    color: variables.$color-text-on-dark;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+    letter-spacing: variables.$letter-spacing-tighter;
+  }
+
+  .text-primary {
+    color: variables.$color-text-on-dark;
+    font-size: variables.$font-size-3xl;
+    font-weight: variables.$font-weight-bold;
+    line-height: variables.$line-height-snug;
+    max-width: 42ch;
+    margin-left: auto;
+    margin-right: auto;
+    @include mixins.respond(phone) {
+      font-size: variables.$font-size-xl;
+    }
+  }
+
+  .text-secondary {
+    color: variables.$color-text-on-dark-muted;
+    font-size: variables.$font-size-lg;
+    margin-top: variables.$space-3;
+    letter-spacing: 0.02em;
+  }
+
+  .btn--bg {
+    background: variables.$gradient-cta;
+    color: variables.$color-text-on-dark;
+    box-shadow: variables.$shadow-cta;
+    border: none;
+    &:hover {
+      background: variables.$gradient-cta-hover;
+      box-shadow: 0 12px 32px -4px rgba(249, 115, 22, 0.5);
+      color: variables.$color-text-on-dark;
+    }
   }
 
   &__socials {
-    position: absolute;
+    position: fixed;
+    left: variables.$space-5;
     top: 50%;
-    border: 2px solid #eee;
-    border-left: 2px solid #eee;
     transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: variables.$radius-xl;
+    overflow: hidden;
+    background: rgba(12, 18, 34, 0.5);
+    backdrop-filter: blur(12px);
+    box-shadow: variables.$shadow-lg;
     @include mixins.respond(tab-port) {
-      display: none;
-    }
-  }
-  &__mouse-scroll-cont {
-    position: absolute;
-    bottom: 3%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    @include mixins.respond(phone) {
       display: none;
     }
   }
 
   &__social {
-    width: 5rem;
+    width: 5.6rem;
   }
 
   &__social-icon-link {
-    width: 100%;
-    display: block;
-    padding: 1.2rem;
-    border-bottom: 2px solid #eee;
-    transition: background .3s;
-
-    &:hover {
-      background: rgba(#fff,.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.6rem;
+    transition: background variables.$transition-fast;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    &:last-child {
+      border-bottom: none;
     }
-
-    &--bd-none {
-      border-bottom: 0;
+    &:hover {
+      background: rgba(255, 255, 255, 0.14);
     }
   }
 
   &__social-icon {
-    width: 100%;
+    width: 2.6rem;
+    height: 2.6rem;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.92;
   }
 
-  &__content {
+  &__mouse-scroll-cont {
     position: absolute;
-    top: 50%;
+    bottom: variables.$space-10;
     left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 90rem;
-    width: 92%;
-
+    transform: translateX(-50%);
+    z-index: 2;
     @include mixins.respond(phone) {
-      padding: 19rem 0 13rem 0;
-      margin: auto;
-      position: static;
-      transform: translate(0, 0);
+      display: none;
     }
   }
 
-  &__info {
-    margin: 3rem auto 0 auto;
-    max-width: 80rem;
+  .mouse {
+    border-color: rgba(255, 255, 255, 0.45);
+    &::before {
+      background: variables.$color-text-on-dark;
+    }
   }
-  &__cta {
-    margin-top: 5rem;
-    text-align: center;
+}
+
+@keyframes hero-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .about {
-  background: rgb(250, 250, 250);
+  background: variables.$color-bg-section;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 12rem;
+    background: variables.$gradient-cta;
+    border-radius: 0 variables.$radius-full variables.$radius-full 0;
+    @include mixins.respond(phone) {
+      height: 8rem;
+    }
+  }
+
   &__content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10rem;
+    gap: variables.$space-20;
+    align-items: start;
     @include mixins.respond(tab-port) {
       grid-template-columns: 1fr;
-      grid-gap: 8rem;
+      gap: variables.$space-12;
     }
-    &-title {
-      font-weight: 700;
-      font-size: 2.8rem;
-      margin-bottom: 3rem;
-      @include mixins.respond(phone) {
-        font-size: 2.4rem;
-      }
+  }
+
+  &__content-title {
+    font-size: variables.$font-size-2xl;
+    font-weight: variables.$font-weight-bold;
+    color: variables.$color-text;
+    margin-bottom: variables.$space-6;
+    letter-spacing: variables.$letter-spacing-tight;
+    @include mixins.respond(phone) {
+      font-size: variables.$font-size-xl;
     }
-    &-details-para {
-      font-size: 1.8rem;
-      color: grey;
-      max-width: 60rem;
-      line-height: 1.7;
-      margin-bottom: 1rem;
-      &--hl {
-        font-weight: 700;
-        margin: 0 3px;
-      }
-      &:last-child {
-        margin-bottom: 4rem;
-      }
-    }
+  }
+
+  &__content-details-para {
+    font-size: variables.$font-size-base;
+    color: variables.$color-text-muted;
+    max-width: 56rem;
+    line-height: variables.$line-height-relaxed;
+    margin-bottom: variables.$space-2;
+  }
+
+  &__content-details-para.why-list {
+    max-width: none;
+    margin-bottom: variables.$space-4;
+  }
+
+  &__content-details-para-2 {
+    font-size: variables.$font-size-base;
+    color: variables.$color-text-muted;
+    line-height: variables.$line-height-relaxed;
+    margin-top: variables.$space-5;
   }
 }
 
 .projects {
+  background: variables.$color-bg;
+
+  &__content {
+    position: relative;
+  }
+
   &__row {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    grid-gap: 5rem;
-    margin-bottom: 11rem;
+    grid-template-columns: 1.35fr 1fr;
+    gap: variables.$space-14;
+    align-items: center;
+    margin-bottom: variables.$space-24;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    transition: none;
+    position: relative;
 
     @include mixins.respond(tab-port) {
       grid-template-columns: 1fr;
-      grid-gap: 2rem;
-      margin-bottom: 8rem;
-    }
-
-    @include mixins.respond(tab-port) {
+      gap: variables.$space-8;
+      margin-bottom: variables.$space-20;
       text-align: center;
     }
 
@@ -149,146 +263,206 @@
       margin-bottom: 0;
     }
 
-    &-img-cont {
-      overflow: hidden;
-    }
-    &-img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-    }
-    &-content {
-      padding: 2rem 0;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: flex-start;
-
-      @include mixins.respond(tab-port) {
-        align-items: center;
-      }
-
-      &-title {
-        font-weight: 700;
-        font-size: 2.8rem;
-        margin-bottom: 2rem;
-        @include mixins.respond(phone) {
-          font-size: 2.4rem;
+    &:nth-child(even) {
+      .projects__row-img-cont {
+        order: 2;
+        @include mixins.respond(tab-port) {
+          order: 0;
         }
       }
-      &-desc {
-        font-size: 1.8rem;
-        color: grey;
-        max-width: 60rem;
-        line-height: 1.7;
-        margin-bottom: 3rem;
-        @include mixins.respond(phone) {
-          font-size: 1.7rem;
+      .projects__row-content {
+        order: 1;
+        @include mixins.respond(tab-port) {
+          order: 0;
         }
       }
+    }
+  }
+
+  &__row-img-cont {
+    position: relative;
+    border-radius: variables.$radius-2xl;
+    overflow: hidden;
+    background: variables.$color-bg-section;
+    box-shadow: variables.$shadow-card;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.35) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity variables.$transition-base;
+      pointer-events: none;
+    }
+  }
+
+  &__row:hover &__row-img-cont::after {
+    opacity: 1;
+  }
+
+  &__row-img {
+    width: 100%;
+    display: block;
+    max-height: 44rem;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform variables.$transition-slow;
+    vertical-align: middle;
+    @include mixins.respond(tab-port) {
+      max-height: 38rem;
+    }
+  }
+
+  &__row:hover &__row-img {
+    transform: scale(1.05);
+  }
+
+  &__row-content {
+    padding: variables.$space-6 variables.$space-8;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    @include mixins.respond(tab-port) {
+      padding: variables.$space-6 0;
+      align-items: center;
+    }
+  }
+
+  &__row-content-title {
+    font-size: variables.$font-size-2xl;
+    font-weight: variables.$font-weight-bold;
+    color: variables.$color-text;
+    margin-bottom: variables.$space-4;
+    letter-spacing: variables.$letter-spacing-tight;
+    line-height: variables.$line-height-snug;
+    @include mixins.respond(phone) {
+      font-size: variables.$font-size-xl;
+    }
+  }
+
+  &__row-content-desc {
+    font-size: variables.$font-size-base;
+    color: variables.$color-text-muted;
+    line-height: variables.$line-height-relaxed;
+    margin-bottom: variables.$space-6;
+    @include mixins.respond(phone) {
+      font-size: 1.55rem;
+    }
+  }
+
+  .btn--theme {
+    &:hover {
+      box-shadow: variables.$shadow-lg;
     }
   }
 }
 
 .contact {
-  background: linear-gradient(
-      to right,
-      rgba(variables.$themeClrPrimary, 0.8),
-      rgba(variables.$themeClrPrimary, 0.8)
-    ),
-    url(../../assets/svg/common-bg.svg);
-  background-size: cover;
-  background-position: center;
+  background: variables.$gradient-contact;
+  color: variables.$color-text-on-dark;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: variables.$gradient-hero-mesh;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url(../../assets/svg/common-bg.svg) center/cover no-repeat;
+    opacity: 0.04;
+    pointer-events: none;
+  }
+
+  .heading-sec__main--lt {
+    color: variables.$color-text-on-dark;
+  }
+
+  .heading-sec__sub--lt {
+    color: variables.$color-text-on-dark-muted;
+  }
 
   &__form-container {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background: rgba(#fff, 2);
-    padding: 4rem;
-    margin-top: 6rem;
-    max-width: 80rem;
-    text-align: right;
-    width: 95%;
-    border-radius: variables.$commonBorderRadius;
-
-    margin: 5rem auto 0 auto;
-    @include mixins.respond(phone) {
-      padding: 3rem;
-    }
-  }
-  &__form-field {
-    margin-bottom: 4rem;
-    @include mixins.respond(phone) {
-      margin-bottom: 3rem;
-    }
-  }
-  &__form-label {
-    color: #666;
-    font-size: 1.4rem;
-    letter-spacing: 1px;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    display: block;
-    text-align: left;
-  }
-  &__form-input {
-    color: #333;
-    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    background: variables.$color-surface;
+    color: variables.$color-text;
+    padding: variables.$space-12;
+    margin-top: variables.$space-14;
+    max-width: 60rem;
     width: 100%;
-    border: 1px solid rgb(235, 235, 235);
-    font-size: 1.6rem;
-    letter-spacing: 0px;
-    background: rgba(rgb(240, 240, 240), 1);
-    border-radius: variables.$commonBorderRadius;
-    font-weight: 600;
-    /* Code for Modern Browsers */
-    &::placeholder {
-      color: #999;
-      font-weight: 600;
-      font-size: 1.6rem;
-    }
-
-    /* Code for WebKit, Blink, Edge */
-    &::-webkit-input-placeholder {
-      color: #999;
-      font-weight: 600;
-      font-size: 1.6rem;
-    }
-
-    /* Code for Internet Explorer 10-11 */
-    &:-ms-input-placeholder {
-      color: #999;
-      font-weight: 600;
-      font-size: 1.6rem;
-    }
-
-    /* Code for Microsoft Edge */
-    &::-ms-input-placeholder {
-      color: #999;
-      font-weight: 600;
-      font-size: 1.6rem;
-    }
-
-    /* Code for Mozilla Firefox 4 to 18 */
-    &:-moz-placeholder {
-      opacity: 1;
-      color: #999;
-      font-weight: 600;
-      font-size: 1.6rem;
-    }
-
-    /* Code for Mozilla Firefox 19+ */
-    &::-moz-placeholder {
-      opacity: 1;
-      color: #999;
-      font-weight: 600;
-      font-size: 1.6rem;
+    border-radius: variables.$radius-2xl;
+    box-shadow: variables.$shadow-xl;
+    border: 1px solid variables.$color-border;
+    @include mixins.respond(phone) {
+      padding: variables.$space-8;
+      margin-top: variables.$space-10;
     }
   }
-  &__btn {
-    width: 30%;
 
-    padding: 2rem 4rem;
-    font-size: 1.6rem;
+  &__form-field {
+    margin-bottom: variables.$space-6;
+    @include mixins.respond(phone) {
+      margin-bottom: variables.$space-4;
+    }
+  }
+
+  &__form-label {
+    display: block;
+    font-size: variables.$font-size-sm;
+    font-weight: variables.$font-weight-bold;
+    color: variables.$color-text-muted;
+    margin-bottom: variables.$space-2;
+    letter-spacing: 0.03em;
+  }
+
+  &__form-input {
+    width: 100%;
+    padding: 1.6rem 1.8rem;
+    font-size: variables.$font-size-base;
+    font-family: inherit;
+    color: variables.$color-text;
+    background: variables.$color-input-bg;
+    border: 1px solid variables.$color-border-input;
+    border-radius: variables.$radius-md;
+    transition: border-color variables.$transition-fast, box-shadow variables.$transition-fast;
+
+    &::placeholder {
+      color: variables.$color-text-light;
+    }
+
+    &:focus {
+      border-color: variables.$color-primary;
+      box-shadow: 0 0 0 4px rgba(variables.$color-primary, 0.12);
+    }
+  }
+
+  textarea.contact__form-input {
+    min-height: 16rem;
+    resize: vertical;
+  }
+
+  &__btn {
+    width: auto;
+    min-width: 16rem;
+    padding: 1.2rem 2.6rem;
+    font-size: variables.$font-size-base;
+    background: variables.$gradient-cta !important;
+    color: variables.$color-text-on-dark !important;
+    box-shadow: variables.$shadow-cta;
+    border: none !important;
+    &:hover {
+      background: variables.$gradient-cta-hover !important;
+      box-shadow: 0 12px 32px -4px rgba(249, 115, 22, 0.5);
+    }
     @include mixins.respond(phone) {
       width: 100%;
     }

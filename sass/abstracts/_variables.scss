@@ -1,3 +1,108 @@
-$themeClrPrimary: #F4F8FA;
+// ============================================
+// KHDev Design System — Premium Tokens
+// ============================================
 
-$commonBorderRadius: 5px;
+// Colors
+$color-primary: #0d9488;
+$color-primary-dark: #0f766e;
+$color-primary-light: #ccfbf1;
+$color-primary-glow: rgba(13, 148, 136, 0.4);
+$color-accent: #f97316;           // Warm orange — primary CTA pop
+$color-accent-dark: #ea580c;
+$color-accent-light: #ffedd5;
+
+$color-bg: #fafaf9;
+$color-bg-section: #f4f4f3;
+$color-surface: #ffffff;
+$color-footer-bg: #0c1222;
+$color-footer-border: #1e293b;
+
+$color-text: #18181b;
+$color-text-muted: #52525b;
+$color-text-light: #71717a;
+$color-text-on-dark: #fafafa;
+$color-text-on-dark-muted: #94a3b8;
+
+$color-border: #e4e4e7;
+$color-border-input: #d4d4d8;
+$color-input-bg: #fafafa;
+
+$themeClrPrimary: $color-primary;
+
+// Gradients (for background use)
+$gradient-hero: linear-gradient(145deg, #064e3b 0%, #0f766e 25%, #0d9488 50%, #134e4a 75%, #0f172a 100%);
+$gradient-hero-mesh: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(13, 148, 136, 0.35), transparent),
+  radial-gradient(ellipse 60% 40% at 100% 50%, rgba(15, 118, 110, 0.2), transparent),
+  radial-gradient(ellipse 50% 30% at 0% 80%, rgba(20, 184, 166, 0.15), transparent);
+$gradient-contact: linear-gradient(165deg, #064e3b 0%, #0f766e 30%, #0d9488 60%, #0f172a 100%);
+$gradient-cta: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+$gradient-cta-hover: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+
+// Typography
+$font-sans: 'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-size-xs: 1.2rem;
+$font-size-sm: 1.4rem;
+$font-size-base: 1.6rem;
+$font-size-lg: 1.8rem;
+$font-size-xl: 2rem;
+$font-size-2xl: 2.6rem;
+$font-size-3xl: 3.2rem;
+$font-size-4xl: 4rem;
+$font-size-5xl: 5.2rem;
+$font-size-hero: 7rem;
+$font-size-hero-sm: 4.8rem;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+$line-height-tight: 1.15;
+$line-height-snug: 1.35;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.7;
+$letter-spacing-tighter: -0.03em;
+$letter-spacing-tight: -0.02em;
+$letter-spacing-wide: 0.06em;
+
+// Spacing
+$space-1: 0.5rem;
+$space-2: 1rem;
+$space-3: 1.5rem;
+$space-4: 2rem;
+$space-5: 2.5rem;
+$space-6: 3rem;
+$space-8: 4rem;
+$space-10: 5rem;
+$space-12: 6rem;
+$space-14: 7rem;
+$space-16: 8rem;
+$space-20: 10rem;
+$space-24: 12rem;
+$space-32: 16rem;
+
+// Radii
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 24px;
+$radius-2xl: 32px;
+$radius-full: 9999px;
+$commonBorderRadius: $radius-md;
+
+// Shadows
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04);
+$shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
+$shadow-xl: 0 24px 48px -12px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.06);
+$shadow-glow: 0 0 40px rgba(13, 148, 136, 0.25);
+$shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+$shadow-card-hover: 0 20px 50px -12px rgba(0, 0, 0, 0.15), 0 8px 20px -8px rgba(0, 0, 0, 0.08);
+$shadow-cta: 0 8px 24px -4px rgba(249, 115, 22, 0.4);
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+
+// Animation
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);

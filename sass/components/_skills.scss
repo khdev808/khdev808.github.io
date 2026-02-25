@@ -3,14 +3,41 @@
 .skills {
   display: flex;
   flex-wrap: wrap;
+  gap: variables.$space-2;
+
   &__skill {
-    padding: 1rem 2rem;
-    margin-bottom: 1.5rem;
-    margin-right: 1.5rem;
-    font-size: 1.6rem;
-    background: rgba(#999, 0.2);
-    border-radius: variables.$commonBorderRadius;
-    font-weight: 600;
-    color: #777;
+    padding: 0.9rem 1.6rem;
+    font-size: variables.$font-size-sm;
+    font-weight: variables.$font-weight-medium;
+    background: variables.$color-primary-light;
+    color: variables.$color-primary-dark;
+    border-radius: variables.$radius-md;
+    border: 1px solid rgba(variables.$color-primary, 0.2);
+  }
+}
+
+.why-list {
+  list-style: none;
+  margin: variables.$space-3 0 variables.$space-6;
+  padding: 0;
+
+  li {
+    position: relative;
+    padding-left: 2.2rem;
+    margin-bottom: variables.$space-2;
+    font-size: variables.$font-size-base;
+    color: variables.$color-text-muted;
+    line-height: variables.$line-height-relaxed;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 8px;
+      height: 8px;
+      background: variables.$color-primary;
+      border-radius: 50%;
+    }
   }
 }

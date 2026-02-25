@@ -1,168 +1,242 @@
 @use "mixins";
 @use "variables";
 
+// ----- Section reveal (reduce motion respected)
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  animation: fade-in-up 0.8s variables.$ease-out-expo forwards;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.reveal-delay-1 { animation-delay: 0.1s; }
+.reveal-delay-2 { animation-delay: 0.2s; }
+.reveal-delay-3 { animation-delay: 0.3s; }
+.reveal-delay-4 { animation-delay: 0.4s; }
+
+// ----- Headings
 .heading-primary {
-  font-size: 7rem;
-  text-transform: uppercase;
-  letter-spacing: 3px;
+  font-size: variables.$font-size-hero;
+  font-weight: variables.$font-weight-extrabold;
+  letter-spacing: variables.$letter-spacing-tighter;
+  line-height: variables.$line-height-tight;
   text-align: center;
-  color: #0A4F6D;
+  color: variables.$color-text;
   @include mixins.respond(phone) {
-    font-size: 4.5rem;
+    font-size: variables.$font-size-hero-sm;
   }
 }
 
 .heading-sec {
   &__mb-bg {
-    margin-bottom: 11rem;
+    margin-bottom: variables.$space-16;
     @include mixins.respond(tab-port) {
-      margin-bottom: 8rem;
+      margin-bottom: variables.$space-12;
     }
   }
-
   &__mb-med {
-    margin-bottom: 9rem;
+    margin-bottom: variables.$space-12;
     @include mixins.respond(tab-port) {
-      margin-bottom: 8rem;
+      margin-bottom: variables.$space-10;
     }
   }
-
   &__main {
     display: block;
-    font-size: 4rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    letter-spacing: 3px;
+    font-size: variables.$font-size-4xl;
+    font-weight: variables.$font-weight-bold;
+    letter-spacing: variables.$letter-spacing-tight;
     text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: variables.$space-4;
     position: relative;
+    color: variables.$color-text;
     &--lt {
-      color: #fff;
+      color: variables.$color-text-on-dark;
       &::after {
-        content: '';
-        background: #fff !important;
+        background: variables.$color-text-on-dark !important;
       }
     }
     &::after {
       content: '';
       position: absolute;
-      top: calc(100% + 1.5rem);
-      height: 5px;
-      width: 3rem;
-      background: variables.$themeClrPrimary;
+      top: calc(100% + 1.2rem);
+      height: 4px;
+      width: 4rem;
+      background: variables.$color-primary;
       left: 50%;
       transform: translateX(-50%);
-      border-radius: variables.$commonBorderRadius;
-
+      border-radius: variables.$radius-full;
       @include mixins.respond(phone) {
-        top: calc(100% + 1.2rem);
+        top: calc(100% + 1rem);
       }
     }
   }
-
   &__sub {
     display: block;
     text-align: center;
-    color: #777;
-    font-size: 2rem;
-    font-weight: 500;
-    max-width: 80rem;
-    margin: auto;
-    line-height: 1.6;
-
+    color: variables.$color-text-muted;
+    font-size: variables.$font-size-lg;
+    font-weight: variables.$font-weight-normal;
+    max-width: 72rem;
+    margin: 1.5rem auto 0;
+    line-height: variables.$line-height-relaxed;
     @include mixins.respond(phone) {
-      font-size: 1.8rem;
+      font-size: variables.$font-size-base;
     }
-
     &--lt {
-      color: #eee;
+      color: variables.$color-text-on-dark-muted;
     }
   }
 }
 
 .heading-sm {
-  font-size: 2.2rem;
+  font-size: variables.$font-size-xl;
+  font-weight: variables.$font-weight-bold;
+  letter-spacing: variables.$letter-spacing-wide;
   text-transform: uppercase;
-  letter-spacing: 1px;
+}
+
+.text-lt {
+  color: variables.$color-text-on-dark;
 }
 
 .main-container {
   max-width: 120rem;
-  margin: auto;
+  margin: 0 auto;
   width: 92%;
 }
 
+// ----- Buttons
 .btn {
-  background: #8BE78B;
-  color: #F4F8FA ;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: variables.$font-weight-bold;
+  letter-spacing: variables.$letter-spacing-wide;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  display: inline-block;
-  font-weight: 700;
-  border-radius: variables.$commonBorderRadius;
-  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
-  transition: transform .3s;
+  border-radius: variables.$radius-md;
+  transition: transform variables.$transition-base, box-shadow variables.$transition-base, background variables.$transition-base, border-color variables.$transition-base;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-3px);
   }
 
+  &:active {
+    transform: translateY(-1px);
+  }
+
   &--bg {
-    padding: 1.5rem 8rem;
-    font-size: 2rem;
+    padding: 1.2rem 2.8rem;
+    font-size: variables.$font-size-base;
   }
   &--med {
-    padding: 1.5rem 5rem;
-    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    font-size: variables.$font-size-sm;
   }
 
   &--theme {
-    background: variables.$themeClrPrimary;
-    color: #fff;
+    background: variables.$color-primary;
+    color: variables.$color-text-on-dark;
+    box-shadow: variables.$shadow-md;
+    &:hover {
+      background: variables.$color-primary-dark;
+      box-shadow: variables.$shadow-lg;
+    }
   }
+
+  &--theme-accent {
+    background: variables.$gradient-cta;
+    color: variables.$color-text-on-dark;
+    box-shadow: variables.$shadow-cta;
+    border: none;
+    &:hover {
+      background: variables.$gradient-cta-hover;
+      box-shadow: 0 12px 32px -4px rgba(249, 115, 22, 0.45);
+    }
+  }
+
   &--theme-inv {
-    color: variables.$themeClrPrimary;
-    background: #fff;
-    border: 2px solid variables.$themeClrPrimary;
+    color: variables.$color-primary;
+    background: variables.$color-surface;
+    border: 2px solid variables.$color-primary;
     box-shadow: none;
-    padding: calc(1.5rem - 2px) calc(5rem - 2px);
+    padding: calc(1rem - 2px) calc(2rem - 2px);
+    &:hover {
+      background: variables.$color-primary-light;
+      box-shadow: variables.$shadow-md;
+    }
   }
 }
 
 .sec-pad {
-  padding: 12rem 0;
+  padding: variables.$space-24 0;
   @include mixins.respond(tab-port) {
-    padding: 8rem 0;
+    padding: variables.$space-16 0;
   }
 }
 
 .text-primary {
-  color: #2E3440;
-  font-size: 3.5rem;
+  color: variables.$color-text;
+  font-size: variables.$font-size-3xl;
   text-align: center;
   width: 100%;
-  font-style: italic;
-  line-height: 1.6;
-  font-weight: 600;
-
+  font-weight: variables.$font-weight-bold;
+  line-height: variables.$line-height-snug;
   @include mixins.respond(phone) {
-    font-size: 2rem;
+    font-size: variables.$font-size-xl;
   }
 }
+
 .text-secondary {
-  color: #5BC0EB;
-  font-size: 2.0rem;
+  color: variables.$color-text-muted;
+  font-size: variables.$font-size-lg;
   text-align: center;
-  font-weight: 600;
+  font-weight: variables.$font-weight-medium;
   width: 100%;
-  line-height: 1.6;
-
+  line-height: variables.$line-height-normal;
+  margin-top: variables.$space-2;
   @include mixins.respond(phone) {
-    font-size: 2rem;
+    font-size: variables.$font-size-base;
   }
 }
-
 
 .d-none {
   display: none;
+}
+
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: variables.$space-2;
+  z-index: 10001;
+  padding: 0.75rem 1.25rem;
+  background: variables.$color-primary;
+  color: variables.$color-text-on-dark;
+  font-weight: variables.$font-weight-bold;
+  font-size: variables.$font-size-sm;
+  text-decoration: none;
+  border-radius: variables.$radius-sm;
+  transition: top variables.$transition-fast;
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+  &:focus {
+    top: variables.$space-2;
+    outline: 2px solid variables.$color-surface;
+    outline-offset: 2px;
+  }
 }
