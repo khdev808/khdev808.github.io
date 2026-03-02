@@ -1,18 +1,18 @@
 # KHDev Portfolio
 
-Portfolio site for **KHDev** — a development team based in Duluth, MN, specializing in web and mobile apps.
+Portfolio site for **KHDev**  -  a development team based in Duluth, MN, specializing in web and mobile apps.
 
 - **Live:** [https://khdev808.github.io](https://khdev808.github.io)
-- **Stack:** Static HTML/CSS (SCSS), vanilla JS, Formspree for contact
+- **Stack:** React, Vite, React Router, Formspree for contact
 
 ## Develop
 
 ```bash
 npm install
-npm run compile:scss
+npm run dev
 ```
 
-Then open `index.html` in a browser (or use a local server). Edits to files in `sass/` will rebuild `css/style.css` automatically.
+Then open [http://localhost:5173](http://localhost:5173). Hot reload is enabled.
 
 ## Build for production
 
@@ -20,26 +20,26 @@ Then open `index.html` in a browser (or use a local server). Edits to files in `
 npm run build
 ```
 
-This compiles SCSS (minified), then runs PostCSS (Autoprefixer) on `css/style.css`. Use the generated `css/style.css` for deployment (e.g. GitHub Pages).
+Output is written to the `docs/` folder for GitHub Pages.
 
-## Scripts
+**GitHub Pages setup:** In your repo → Settings → Pages → Source: "Deploy from a branch" → Branch: main → Folder: `/docs` → Save. The SPA will handle all routes (including direct links and refresh on `/projects/:slug`).
 
-| Script | Description |
-|--------|-------------|
-| `npm run compile:scss` | Compile SCSS and watch for changes |
-| `npm run compile:scss:once` | Single SCSS compile (no watch) |
-| `npm run prefix:css` | Run Autoprefixer on `css/style.css` |
-| `npm run compress:css` | Compile SCSS to minified CSS |
-| `npm run build` | Full build: compress + prefix |
+## Add a new portfolio item
+
+1. Edit `src/data/projects.js` and add a new object to the `projects` array.
+2. Add the project image to `public/assets/png/`.
+3. The new project will appear on the home page and be reachable at `/projects/your-slug`.
+
+Required fields: `slug`, `title`, `shortDesc`, `image`, `overview`, `keyFeatures`, `closingPara`, `tools`, `links`.
 
 ## Structure
 
-- `index.html` — Home (hero, about, projects, contact)
-- `dimple.html`, `troutroutes.html`, `checksammy.html` — Case studies
-- `sass/` — SCSS source (`main.scss` → `css/style.css`)
-- `css/style.css` — Compiled stylesheet
-- `index.js` — Header/menu behavior
-- `assets/` — Images and icons
+- `src/`  -  React app
+  - `components/`  -  Header, Footer, Layout
+  - `pages/`  -  Home, ProjectDetail
+  - `data/projects.js`  -  Portfolio content (add new projects here)
+- `public/assets/`  -  Static images and icons
+- `docs/`  -  Build output (generated, used by GitHub Pages)
 
 ## License
 

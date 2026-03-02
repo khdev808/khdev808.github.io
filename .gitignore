@@ -35,7 +35,6 @@ Desktop.ini
 *.temp
 .cache/
 
-# Optional: Uncomment if you want to ignore compiled CSS (since you have SCSS source)
-# css/style.css
-# css/style.css.map
+# Build output (docs is committed for GitHub Pages)
+dist/
 
