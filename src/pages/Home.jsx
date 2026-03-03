@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import ButtonLink from '../components/ButtonLink';
 import { projects } from '../data/projects';
 import './Home.css';
 
@@ -87,21 +87,21 @@ export default function Home() {
             </p>
           </div>
           <div className="hero__cta-group">
-            <Link to="/#projects" className="btn btn--primary">
+            <ButtonLink to="/#projects" variant="primary">
               See Our Work
-            </Link>
-            <Link to="/#contact" className="btn btn--outline">
+            </ButtonLink>
+            <ButtonLink to="/#contact" variant="outline" className="hero__cta-flow">
               Start a Project
-            </Link>
+            </ButtonLink>
           </div>
         </div>
         <div className="hero__socials">
-          <a href="https://www.linkedin.com/company/khdev" className="hero__social" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <ButtonLink href="https://www.linkedin.com/company/khdev" className="hero__social" plain aria-label="LinkedIn">
             <img src="/assets/png/linkedin-ico.png" alt="" />
-          </a>
-          <a href="https://github.com/khdev808" className="hero__social" target="_blank" rel="noreferrer" aria-label="GitHub">
+          </ButtonLink>
+          <ButtonLink href="https://github.com/khdev808" className="hero__social" plain aria-label="GitHub">
             <img src="/assets/png/github-ico.png" alt="" />
-          </a>
+          </ButtonLink>
         </div>
         <div className="hero__scroll" aria-hidden="true">
           <div className="hero__mouse" />
@@ -120,9 +120,32 @@ export default function Home() {
             {services.map(({ title, desc, icon }) => (
               <div key={icon} className="services__card">
                 <span className={`services__icon services__icon--${icon}`}>
-                  {icon === 'ai' && '◆'}
-                  {icon === 'web' && '◇'}
-                  {icon === 'mobile' && '▣'}
+                  {icon === 'ai' && (
+                    <svg className="services__icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="12" y1="2" x2="12" y2="6"/>
+                      <line x1="12" y1="18" x2="12" y2="22"/>
+                      <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
+                      <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+                      <line x1="2" y1="12" x2="6" y2="12"/>
+                      <line x1="18" y1="12" x2="22" y2="12"/>
+                      <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
+                      <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  )}
+                  {icon === 'web' && (
+                    <svg className="services__icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M2 12h20"/>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                  )}
+                  {icon === 'mobile' && (
+                    <svg className="services__icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="5" y="2" width="14" height="20" rx="2.5" ry="2.5"/>
+                      <circle cx="12" cy="18" r="1.5"/>
+                    </svg>
+                  )}
                 </span>
                 <h3 className="services__card-title">{title}</h3>
                 <p className="services__card-desc">{desc}</p>
@@ -151,9 +174,9 @@ export default function Home() {
               <p className="about__para">
                 Whether you're validating an MVP, scaling an existing product, or integrating AI into your stack - we're here to make it happen. Let's <strong>connect</strong> and build something remarkable.
               </p>
-              <Link to="/#contact" className="btn btn--accent">
+              <ButtonLink to="/#contact" variant="accent">
                 Get in Touch
-              </Link>
+              </ButtonLink>
             </div>
             <div className="about__skills">
               <h3 className="about__subtitle">Tech Stack</h3>
@@ -203,12 +226,9 @@ export default function Home() {
                 <div className="projects__body">
                   <h3 className="projects__title">{project.title}</h3>
                   <p className="projects__desc">{project.shortDesc}</p>
-                  <Link
-                    to={`/projects/${project.slug}`}
-                    className="btn btn--accent"
-                  >
+                  <ButtonLink to={`/projects/${project.slug}`} variant="accent">
                     Case Study
-                  </Link>
+                  </ButtonLink>
                 </div>
               </article>
             ))}

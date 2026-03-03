@@ -1,3 +1,4 @@
+import ButtonLink from './ButtonLink';
 import './Footer.css';
 
 const socialLinks = [
@@ -14,12 +15,11 @@ export default function Footer() {
             <span className="footer__label">Social</span>
             <div className="footer__icons">
               {socialLinks.map(({ href, label, icon }) => (
-                <a
+                <ButtonLink
                   key={icon}
                   href={href}
-                  target="_blank"
-                  rel="noreferrer"
                   className="footer__icon-link"
+                  plain
                   aria-label={label}
                 >
                   <img
@@ -27,7 +27,7 @@ export default function Footer() {
                     alt=""
                     className="footer__icon"
                   />
-                </a>
+                </ButtonLink>
               ))}
             </div>
           </div>

@@ -1,4 +1,5 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import ButtonLink from '../components/ButtonLink';
 import { projects } from '../data/projects';
 import './ProjectDetail.css';
 
@@ -10,9 +11,11 @@ export default function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="project-not-found">
-        <h1>Project not found</h1>
-        <Link to="/">Back to Home</Link>
+      <div className="project-detail project-detail--not-found">
+        <div className="project-not-found">
+          <h1>Project not found</h1>
+          <ButtonLink to="/" variant="primary">Back to Home</ButtonLink>
+        </div>
       </div>
     );
   }
@@ -21,9 +24,10 @@ export default function ProjectDetail() {
     <div className="project-detail">
       <div className="project-detail__back-bar">
         <div className="container">
-          <Link to="/#projects" className="project-detail__back-btn">
-            <span className="project-detail__back-arrow" aria-hidden>←</span> Back to Projects
-          </Link>
+          <ButtonLink to="/#projects" className="project-detail__back-btn" plain>
+            <span className="project-detail__back-icon" aria-hidden>‹</span>
+            View All Work
+          </ButtonLink>
         </div>
       </div>
       <section className="project-hero">
@@ -42,15 +46,9 @@ export default function ProjectDetail() {
           {project.links?.length > 0 && (
           <div className="project-hero__cta">
             {project.links.map(({ label, url }) => (
-              <a
-                key={label}
-                href={url}
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn--primary"
-              >
+              <ButtonLink key={label} href={url} variant="primary">
                 {label}
-              </a>
+              </ButtonLink>
             ))}
           </div>
           )}
@@ -68,44 +66,42 @@ export default function ProjectDetail() {
               />
             </div>
             <div className="project-content__body">
-              <div className="project-content__block">
+              <section className="project-content__block project-content__block--overview">
                 <h3>Project Overview</h3>
                 {project.overview.map((para, i) => (
                   <p key={i}>{para}</p>
                 ))}
-              </div>
-              <div className="project-content__block">
+              </section>
+              <section className="project-content__block project-content__block--features">
                 <h3>Key Features</h3>
                 <ul>
                   {project.keyFeatures.map((item, i) => (
                     <li key={i}>{item}</li>
                   ))}
                 </ul>
-              </div>
-              <p className="project-content__closing">{project.closingPara}</p>
-              <div className="project-content__block">
+              </section>
+              <blockquote className="project-content__closing">
+                {project.closingPara}
+              </blockquote>
+              <section className="project-content__block project-content__block--tools">
                 <h3>Tools Used</h3>
                 <div className="project-content__tools">
                   {project.tools.map((tool) => (
                     <span key={tool} className="project-content__tool">{tool}</span>
                   ))}
                 </div>
-              </div>
+              </section>
               {project.links?.length > 0 && (
-              <div className="project-content__links">
+              <aside className="project-content__block project-content__block--cta">
                 <h3>See Live</h3>
-                {project.links.map(({ label, url }) => (
-                  <a
-                    key={label}
-                    href={url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn btn--accent"
-                  >
-                    {label}
-                  </a>
-                ))}
-              </div>
+                <div className="project-content__links">
+                  {project.links.map(({ label, url }) => (
+                    <ButtonLink key={label} href={url} variant="accent">
+                      {label}
+                    </ButtonLink>
+                  ))}
+                </div>
+              </aside>
               )}
             </div>
           </div>

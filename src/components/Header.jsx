@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 
 const navLinks = [
@@ -16,35 +16,55 @@ export default function Header() {
 
   const closeMenu = () => setMenuOpen(false);
 
-  const handleNavClick = (e, to) => {
+  const navigate = useNavigate();
+
+  const handleNavClick = (to) => {
     closeMenu();
-    if (to === '/' && location.pathname === '/') {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (to === '/') {
+      if (location.pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/');
+      }
+    } else {
+      const hash = to.split('#')[1];
+      const path = (to.split('#')[0] || '/').replace(/\/$/, '') || '/';
+      if (location.pathname === '/' && path === '/') {
+        const el = document.getElementById(hash);
+        el?.scrollIntoView({ behavior: 'smooth' });
+        window.history.replaceState(null, '', to);
+      } else {
+        navigate(to);
+      }
     }
   };
 
   return (
     <header className="header" role="banner">
       <div className="header__content">
-        <Link to="/" className="header__logo" aria-label="KHDev Home" onClick={closeMenu}>
+        <button
+          type="button"
+          className="header__logo"
+          aria-label="KHDev Home"
+          onClick={() => { closeMenu(); handleNavClick('/'); }}
+        >
           <img
             src="/assets/png/logo.png"
             alt="KHDev"
             className="header__logo-img"
           />
-        </Link>
+        </button>
         <nav className="header__nav">
           <ul className="header__links">
             {navLinks.map(({ to, label }) => (
               <li key={to}>
-                <Link
-                  to={to}
+                <button
+                  type="button"
                   className={`header__link ${location.pathname === '/' && to === '/' ? 'header__link--active' : ''}`}
-                  onClick={(e) => handleNavClick(e, to)}
+                  onClick={() => handleNavClick(to)}
                 >
                   {label}
-                </Link>
+                </button>
               </li>
             ))}
           </ul>
@@ -72,13 +92,13 @@ export default function Header() {
         <ul className="header__mobile-links">
           {navLinks.map(({ to, label }) => (
             <li key={to}>
-              <Link
-                to={to}
+              <button
+                type="button"
                 className="header__mobile-link"
-                onClick={closeMenu}
+                onClick={() => handleNavClick(to)}
               >
                 {label}
-              </Link>
+              </button>
             </li>
           ))}
         </ul>
