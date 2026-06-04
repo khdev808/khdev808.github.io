@@ -1,6 +1,6 @@
 # KHDev Portfolio
 
-Portfolio site for **KHDev**  -  a development team based in Duluth, MN, specializing in web and mobile apps.
+Portfolio site for **KHDev** — a development team based in Duluth, MN, specializing in AI, web, and mobile apps.
 
 - **Live:** [https://khdev808.github.io](https://khdev808.github.io)
 - **Stack:** React, Vite, React Router, Formspree for contact
@@ -12,7 +12,7 @@ npm install
 npm run dev
 ```
 
-Then open [http://localhost:5173](http://localhost:5173). Hot reload is enabled.
+Open [http://localhost:5173](http://localhost:5173). Hot reload is enabled.
 
 ## Build for production
 
@@ -20,26 +20,47 @@ Then open [http://localhost:5173](http://localhost:5173). Hot reload is enabled.
 npm run build
 ```
 
-Output is written to the `docs/` folder for GitHub Pages.
+Output is written to `docs/` for GitHub Pages.
 
-**GitHub Pages setup:** In your repo → Settings → Pages → Source: "Deploy from a branch" → Branch: main → Folder: `/docs` → Save. The SPA will handle all routes (including direct links and refresh on `/projects/:slug`).
+**GitHub Pages:** Repo → Settings → Pages → Branch: `main` (or your deploy branch) → Folder: `/docs`.
 
-## Add a new portfolio item
+## Add a portfolio project
 
-1. Edit `src/data/projects.js` and add a new object to the `projects` array.
-2. Add the project image to `public/assets/png/`.
-3. The new project will appear on the home page and be reachable at `/projects/your-slug`.
+1. Add gallery images under `public/portfolio-gallery/{id}-{slug}/` (include `artwork.webp` as the hero slide).
+2. Register paths in `src/data/portfolioGallery.json` keyed by `galleryId` (e.g. `mobile-2`, `web-6`).
+3. Add a case study in `src/data/projects.js` with `slug`, `title`, `shortDesc`, `galleryId` (or `galleryIds` for multiple), `overview`, `keyFeatures`, `closingPara`, `tools`, and `links`.
+4. For App Store / Play Store ratings, add iOS app IDs to `src/data/iosStoreRatings.json` and Android package IDs to `src/data/androidStoreRatings.json` (refresh from store data as needed).
+5. Run `npm run build` so `docs/` is updated for deploy.
 
-Required fields: `slug`, `title`, `shortDesc`, `image`, `overview`, `keyFeatures`, `closingPara`, `tools`, `links`.
+### Project fields
+
+| Field | Required | Notes |
+|-------|----------|--------|
+| `slug` | Yes | URL path: `/projects/your-slug` |
+| `title`, `shortDesc` | Yes | Shown on home and case study |
+| `galleryId` / `galleryIds` | Recommended | Drives image slider |
+| `image` | Yes | Fallback poster if gallery is empty |
+| `category` or `categories` | Yes | `web`, `mobile`, and/or `ai` |
+| `links` | Optional | `iOS`, `Android`, `Website` buttons |
+
+## Theme
+
+The site defaults to **System** (follows OS light/dark). Users can choose Light or Dark in the header; preference is stored in `localStorage` under `khdev-theme`. If system preference is unavailable, **light** mode is used.
 
 ## Structure
 
-- `src/`  -  React app
-  - `components/`  -  Header, Footer, Layout
-  - `pages/`  -  Home, ProjectDetail
-  - `data/projects.js`  -  Portfolio content (add new projects here)
-- `public/assets/`  -  Static images and icons
-- `docs/`  -  Build output (generated, used by GitHub Pages)
+```
+src/
+  components/     Header, Footer, sliders, ratings, theme toggle
+  pages/          Home, ProjectDetail, NotFound
+  data/           projects.js, portfolioGallery.json, store ratings
+  hooks/          useTheme, useAppRating
+  lib/            theme, gallery paths, store rating helpers
+public/
+  assets/         Logos, icons, legacy PNG posters
+  portfolio-gallery/  Per-project WebP screenshots
+docs/             Production build (committed for GitHub Pages)
+```
 
 ## License
 
