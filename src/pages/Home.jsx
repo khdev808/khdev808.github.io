@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ButtonLink from '../components/ButtonLink';
+import FeaturedProjectItem from '../components/FeaturedProjectItem';
 import { projects } from '../data/projects';
 import './Home.css';
 
@@ -37,12 +38,6 @@ const whyList = [
   'Full-stack expertise - one team from design to deployment',
   'AI-native thinking - we build smart, not just fast',
 ];
-
-const categoryLabels = {
-  ai: 'AI',
-  web: 'Web',
-  mobile: 'Mobile',
-};
 
 export default function Home() {
   const [formStatus, setFormStatus] = useState({ type: '', message: '' });
@@ -202,35 +197,11 @@ export default function Home() {
           </div>
           <div className="projects__list">
             {projects.map((project, i) => (
-              <article
+              <FeaturedProjectItem
                 key={project.slug}
-                className={`projects__item projects__item--${i % 2 === 0 ? 'img-left' : 'img-right'}`}
-              >
-                <div className="projects__img-wrap">
-                  <img
-                    src={project.image}
-                    alt={`${project.title} screenshot`}
-                    className="projects__img"
-                    loading="lazy"
-                  />
-                  {(project.categories?.length || project.category) && (
-                    <span className="projects__badges">
-                      {(project.categories || [project.category]).map((cat) => (
-                        <span key={cat} className={`projects__badge projects__badge--${cat}`}>
-                          {categoryLabels[cat] || cat}
-                        </span>
-                      ))}
-                    </span>
-                  )}
-                </div>
-                <div className="projects__body">
-                  <h3 className="projects__title">{project.title}</h3>
-                  <p className="projects__desc">{project.shortDesc}</p>
-                  <ButtonLink to={`/projects/${project.slug}`} variant="accent">
-                    Case Study
-                  </ButtonLink>
-                </div>
-              </article>
+                project={project}
+                layoutClass={`projects__item--${i % 2 === 0 ? 'img-left' : 'img-right'}`.trim()}
+              />
             ))}
           </div>
         </div>
