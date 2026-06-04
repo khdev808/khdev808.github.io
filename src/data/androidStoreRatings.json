@@ -1,0 +1,30 @@
+{
+  "ai.undefined.fitbykaty": {
+    "rating": 4.8,
+    "ratingCount": 654,
+    "appName": "Sesh: Workouts for Women",
+    "storeUrl": "https://play.google.com/store/apps/details?id=ai.undefined.fitbykaty&hl=en&gl=us",
+    "fetchedAt": "2026-06-04T00:00:00.000Z"
+  },
+  "com.troutinsights.troutroutes": {
+    "rating": 3.6,
+    "ratingCount": 593,
+    "appName": "TroutRoutes: Trout Fishing App",
+    "storeUrl": "https://play.google.com/store/apps/details?id=com.troutinsights.troutroutes&hl=en&gl=us",
+    "fetchedAt": "2026-06-02T18:39:34.813Z"
+  },
+  "com.reco.app": {
+    "rating": 4.6921268,
+    "ratingCount": 8524,
+    "appName": "Reco Social",
+    "storeUrl": "https://play.google.com/store/apps/details?id=com.reco.app&hl=en&gl=us",
+    "fetchedAt": "2026-06-02T18:39:35.490Z"
+  },
+  "com.checksammy.mobile": {
+    "rating": 4.3333335,
+    "ratingCount": 6,
+    "appName": "CheckSammy Professional",
+    "storeUrl": "https://play.google.com/store/apps/details?id=com.checksammy.mobile&hl=en&gl=us",
+    "fetchedAt": "2026-06-02T18:39:36.955Z"
+  }
+}

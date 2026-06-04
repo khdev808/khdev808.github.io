@@ -1,18 +1,18 @@
 # KHDev Portfolio
 
-Portfolio site for **KHDev** — a development team based in Duluth, MN, specializing in web and mobile apps.
+Portfolio site for **KHDev** — a development team based in Duluth, MN, specializing in AI, web, and mobile apps.
 
 - **Live:** [https://khdev808.github.io](https://khdev808.github.io)
-- **Stack:** Static HTML/CSS (SCSS), vanilla JS, Formspree for contact
+- **Stack:** React, Vite, React Router, Formspree for contact
 
 ## Develop
 
 ```bash
 npm install
-npm run compile:scss
+npm run dev
 ```
 
-Then open `index.html` in a browser (or use a local server). Edits to files in `sass/` will rebuild `css/style.css` automatically.
+Open [http://localhost:5173](http://localhost:5173). Hot reload is enabled.
 
 ## Build for production
 
@@ -20,26 +20,47 @@ Then open `index.html` in a browser (or use a local server). Edits to files in `
 npm run build
 ```
 
-This compiles SCSS (minified), then runs PostCSS (Autoprefixer) on `css/style.css`. Use the generated `css/style.css` for deployment (e.g. GitHub Pages).
+Output is written to `docs/` for GitHub Pages.
 
-## Scripts
+**GitHub Pages:** Repo → Settings → Pages → Branch: `main` (or your deploy branch) → Folder: `/docs`.
 
-| Script | Description |
-|--------|-------------|
-| `npm run compile:scss` | Compile SCSS and watch for changes |
-| `npm run compile:scss:once` | Single SCSS compile (no watch) |
-| `npm run prefix:css` | Run Autoprefixer on `css/style.css` |
-| `npm run compress:css` | Compile SCSS to minified CSS |
-| `npm run build` | Full build: compress + prefix |
+## Add a portfolio project
+
+1. Add gallery images under `public/portfolio-gallery/{id}-{slug}/` (include `artwork.webp` as the hero slide).
+2. Register paths in `src/data/portfolioGallery.json` keyed by `galleryId` (e.g. `mobile-2`, `web-6`).
+3. Add a case study in `src/data/projects.js` with `slug`, `title`, `shortDesc`, `galleryId` (or `galleryIds` for multiple), `overview`, `keyFeatures`, `closingPara`, `tools`, and `links`.
+4. For App Store / Play Store ratings, add iOS app IDs to `src/data/iosStoreRatings.json` and Android package IDs to `src/data/androidStoreRatings.json` (refresh from store data as needed).
+5. Run `npm run build` so `docs/` is updated for deploy.
+
+### Project fields
+
+| Field | Required | Notes |
+|-------|----------|--------|
+| `slug` | Yes | URL path: `/projects/your-slug` |
+| `title`, `shortDesc` | Yes | Shown on home and case study |
+| `galleryId` / `galleryIds` | Recommended | Drives image slider |
+| `image` | Yes | Fallback poster if gallery is empty |
+| `category` or `categories` | Yes | `web`, `mobile`, and/or `ai` |
+| `links` | Optional | `iOS`, `Android`, `Website` buttons |
+
+## Theme
+
+The site defaults to **System** (follows OS light/dark). Users can choose Light or Dark in the header; preference is stored in `localStorage` under `khdev-theme`. If system preference is unavailable, **light** mode is used.
 
 ## Structure
 
-- `index.html` — Home (hero, about, projects, contact)
-- `dimple.html`, `troutroutes.html`, `checksammy.html` — Case studies
-- `sass/` — SCSS source (`main.scss` → `css/style.css`)
-- `css/style.css` — Compiled stylesheet
-- `index.js` — Header/menu behavior
-- `assets/` — Images and icons
+```
+src/
+  components/     Header, Footer, sliders, ratings, theme toggle
+  pages/          Home, ProjectDetail, NotFound
+  data/           projects.js, portfolioGallery.json, store ratings
+  hooks/          useTheme, useAppRating
+  lib/            theme, gallery paths, store rating helpers
+public/
+  assets/         Logos, icons, legacy PNG posters
+  portfolio-gallery/  Per-project WebP screenshots
+docs/             Production build (committed for GitHub Pages)
+```
 
 ## License
 
