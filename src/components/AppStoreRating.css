@@ -1,0 +1,263 @@
+/* App store ratings — tuned for html { font-size: 62.5% } (1rem = 10px) */
+
+.app-store-rating {
+  width: 100%;
+  min-width: 0;
+}
+
+/* —— Loading —— */
+.app-store-rating__skeleton {
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    110deg,
+    var(--color-bg-section) 0%,
+    var(--color-surface) 45%,
+    var(--color-bg-section) 90%
+  );
+  background-size: 200% 100%;
+  border: 1px solid var(--color-border);
+  animation: app-store-rating-shimmer 1.5s ease-in-out infinite;
+}
+
+.app-store-rating__skeleton--compact {
+  min-height: 7.2rem;
+}
+
+.app-store-rating__skeleton--compact.app-store-rating__skeleton--dual {
+  min-height: 9.6rem;
+}
+
+.app-store-rating__skeleton--detail {
+  min-height: 8rem;
+}
+
+.app-store-rating__skeleton--detail.app-store-rating__skeleton--dual {
+  min-height: 8rem;
+}
+
+@media (min-width: 600px) {
+  .app-store-rating__skeleton--detail.app-store-rating__skeleton--dual {
+    min-height: 8rem;
+  }
+}
+
+@keyframes app-store-rating-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* —— Compact (home featured cards) —— */
+.app-store-rating--compact .app-store-rating__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+.app-store-rating--compact .app-store-rating__grid--dual {
+  gap: 1rem;
+}
+
+@media (min-width: 520px) {
+  .app-store-rating--compact .app-store-rating__grid--dual {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+}
+
+.app-store-rating__tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 0;
+  padding: 1.4rem 1.6rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.app-store-rating__tile-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.app-store-rating__tile-score-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.app-store-rating__badge {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 0.35rem 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 6px;
+  line-height: 1.2;
+}
+
+.app-store-rating__badge--ios {
+  background: rgba(0, 153, 221, 0.12);
+  color: #0369a1;
+  border: 1px solid rgba(0, 153, 221, 0.22);
+}
+
+.app-store-rating__badge--android {
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.22);
+}
+
+.app-store-rating__score {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.app-store-rating__count {
+  font-size: 1.3rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.app-store-rating__stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  flex-shrink: 0;
+}
+
+.app-store-rating__star-wrap {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.app-store-rating__star {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.app-store-rating__star--empty {
+  color: var(--color-star-empty);
+}
+
+.app-store-rating__star-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.app-store-rating__star--filled {
+  color: var(--color-star-filled);
+}
+
+/* —— Detail (case study hero) —— */
+.app-store-rating__detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .app-store-rating__detail-grid--dual {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.app-store-rating__card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-lg);
+  min-width: 0;
+}
+
+.app-store-rating__card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.app-store-rating__card-source {
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-store-rating__card-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.app-store-rating__card-score-block {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.app-store-rating__card-score {
+  font-size: 3.6rem;
+  font-weight: 800;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.app-store-rating__card-out-of {
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+}
+
+.app-store-rating__card-count-block {
+  text-align: right;
+}
+
+.app-store-rating__card-count {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+/* —— Home project card placement —— */
+.projects__ratings {
+  width: 100%;
+  min-width: 0;
+}
+
+.projects__body .app-store-rating--compact {
+  margin: 0 0 var(--space-md);
+}
+
+.project-hero .app-store-rating--detail {
+  margin-bottom: var(--space-lg);
+  max-width: 100%;
+}
