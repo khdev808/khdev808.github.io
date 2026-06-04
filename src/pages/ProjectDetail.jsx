@@ -78,8 +78,7 @@ export default function ProjectDetail() {
               <ProjectImageSlider
                 images={sliderImages}
                 alt={`${project.title} screenshot`}
-                variant="hero"
-                objectFit="contain"
+                variant="card"
               />
             </div>
             <div className="project-content__body">

@@ -89,7 +89,7 @@ export default function ProjectImageSlider({
               loading={i === 0 ? 'eager' : 'lazy'}
               decoding="async"
               draggable={false}
-              className={`project-slider__img project-slider__img--${objectFit}${
+              className={`project-slider__img project-slider__img--${objectFit === 'contain' ? 'contain' : 'cover'}${
                 motionReady && active ? ` ${kenBurnsClass(i)}` : ''
               }${motionReady && single && active ? ' project-slider__ken-burns project-slider__ken-burns--1' : ''}`}
               onContextMenu={(e) => e.preventDefault()}
