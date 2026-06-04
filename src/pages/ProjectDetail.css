@@ -1,5 +1,5 @@
 .project-detail {
-  padding-top: 64px;
+  padding-top: calc(var(--header-height) + var(--safe-top));
 }
 
 .project-detail--not-found {
@@ -16,7 +16,7 @@
   justify-content: center;
   gap: var(--space-lg);
   padding: var(--space-3xl);
-  padding-top: calc(64px + var(--space-2xl));
+  padding-top: calc(var(--header-height) + var(--safe-top) + var(--space-2xl));
 }
 
 .project-not-found a {
@@ -34,7 +34,7 @@
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   padding: var(--space-md) 0;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
 }
 
 .project-detail__back-btn {
@@ -182,18 +182,21 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-bg-section);
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.08),
-    0 8px 24px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow-md), var(--shadow-inset-highlight);
   line-height: 0;
 }
 
-.project-content__img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
+.project-content__img-wrap--slider {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  min-height: 28rem;
+  isolation: isolate;
+}
+
+@media (max-width: 600px) {
+  .project-content__img-wrap--slider {
+    min-height: 22rem;
+  }
 }
 
 /* Block variants for visual variety */
@@ -226,8 +229,12 @@
 }
 
 .project-content__block--tools {
-  background: linear-gradient(135deg, #0c1222 0%, #1e3a4f 100%);
+  background: linear-gradient(135deg, var(--color-footer) 0%, #1e3a4f 100%);
   color: var(--color-text-on-dark);
+}
+
+[data-resolved='dark'] .project-content__block--tools {
+  background: linear-gradient(135deg, #0a0e18 0%, #1a2a3a 100%);
 }
 .project-content__block--tools h3 {
   color: rgba(255, 255, 255, 0.95);
@@ -238,6 +245,11 @@
   background: linear-gradient(135deg, var(--color-primary-light) 0%, rgba(0, 153, 221, 0.08) 100%);
   border: 2px solid rgba(0, 153, 221, 0.3);
   text-align: center;
+}
+
+[data-resolved='dark'] .project-content__block--cta {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(0, 153, 221, 0.06) 100%);
+  border-color: rgba(56, 189, 248, 0.35);
 }
 .project-content__block--cta h3 {
   color: var(--color-primary);
@@ -306,6 +318,11 @@
   box-shadow: var(--shadow-depth-1);
   position: relative;
 }
+
+[data-resolved='dark'] .project-content__closing {
+  color: var(--color-primary);
+}
+
 .project-content__closing::before {
   content: '"';
   position: absolute;

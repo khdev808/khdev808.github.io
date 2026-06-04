@@ -1,6 +1,11 @@
+import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import AppStoreRating from '../components/AppStoreRating';
 import ButtonLink from '../components/ButtonLink';
+import ProjectImageSlider from '../components/ProjectImageSlider';
 import { projects } from '../data/projects';
+import { getProjectSliderImages } from '../lib/portfolioGallery';
+import { getStoreLinksFromProject, projectHasStoreRating } from '../lib/projectStoreLinks';
 import './ProjectDetail.css';
 
 const categoryLabels = { ai: 'AI', web: 'Web', mobile: 'Mobile' };
@@ -8,6 +13,14 @@ const categoryLabels = { ai: 'AI', web: 'Web', mobile: 'Mobile' };
 export default function ProjectDetail() {
   const { slug } = useParams();
   const project = projects.find((p) => p.slug === slug);
+  const storeLinks = useMemo(
+    () => (project ? getStoreLinksFromProject(project) : []),
+    [project],
+  );
+  const sliderImages = useMemo(
+    () => (project ? getProjectSliderImages(project) : []),
+    [project],
+  );
 
   if (!project) {
     return (
@@ -43,6 +56,9 @@ export default function ProjectDetail() {
           )}
           <h1 className="project-hero__title">{project.title}</h1>
           <p className="project-hero__desc">{project.shortDesc}</p>
+          {projectHasStoreRating(project) && (
+            <AppStoreRating storeLinks={storeLinks} variant="detail" />
+          )}
           {project.links?.length > 0 && (
           <div className="project-hero__cta">
             {project.links.map(({ label, url }) => (
@@ -58,11 +74,12 @@ export default function ProjectDetail() {
       <section className="project-content">
         <div className="container">
           <div className="project-content__grid">
-            <div className="project-content__img-wrap">
-              <img
-                src={project.image}
+            <div className="project-content__img-wrap project-content__img-wrap--slider">
+              <ProjectImageSlider
+                images={sliderImages}
                 alt={`${project.title} screenshot`}
-                className="project-content__img"
+                variant="hero"
+                objectFit="contain"
               />
             </div>
             <div className="project-content__body">

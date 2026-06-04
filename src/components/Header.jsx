@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
+import { useTheme } from '../hooks/useTheme';
 import './Header.css';
 
 const navLinks = [
@@ -13,6 +15,7 @@ const navLinks = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const { preference, setTheme } = useTheme();
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -54,24 +57,26 @@ export default function Header() {
             className="header__logo-img"
           />
         </button>
-        <nav className="header__nav">
-          <ul className="header__links">
-            {navLinks.map(({ to, label }) => (
-              <li key={to}>
-                <button
-                  type="button"
-                  className={`header__link ${location.pathname === '/' && to === '/' ? 'header__link--active' : ''}`}
-                  onClick={() => handleNavClick(to)}
-                >
-                  {label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <button
-          type="button"
-          className="header__ham"
+        <div className="header__actions">
+          <ThemeToggle preference={preference} onChange={setTheme} />
+          <nav className="header__nav" aria-label="Main">
+            <ul className="header__links">
+              {navLinks.map(({ to, label }) => (
+                <li key={to}>
+                  <button
+                    type="button"
+                    className={`header__link ${location.pathname === '/' && to === '/' ? 'header__link--active' : ''}`}
+                    onClick={() => handleNavClick(to)}
+                  >
+                    {label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <button
+            type="button"
+            className="header__ham"
           aria-label="Toggle menu"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen(!menuOpen)}
@@ -86,9 +91,13 @@ export default function Header() {
             alt=""
             className={`header__ham-icon header__ham-icon--close ${!menuOpen ? 'header__ham-icon--hidden' : ''}`}
           />
-        </button>
+          </button>
+        </div>
       </div>
       <div className={`header__mobile ${menuOpen ? 'header__mobile--open' : ''}`}>
+        <div className="header__mobile-theme">
+          <ThemeToggle preference={preference} onChange={setTheme} />
+        </div>
         <ul className="header__mobile-links">
           {navLinks.map(({ to, label }) => (
             <li key={to}>
